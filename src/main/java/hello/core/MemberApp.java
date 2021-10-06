@@ -3,16 +3,23 @@ package hello.core;
 import hello.core.member.Grade;
 import hello.core.member.Member;
 import hello.core.member.MemberService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class MemberApp {
     public static void main(String[] args){
-        AppConfig appConfig = new AppConfig();
-        MemberService memberService = appConfig.memberService();
+//        AppConfig appConfig = new AppConfig();
+//        MemberService memberService = appConfig.memberService();
+
+        // AppConfig 설정정보가지고 컨테이너에 다 넣고 관리함
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        MemberService memberService = applicationContext.getBean("memberService",MemberService.class); // 이름과 타입
+
         Member member = new Member(1L, "memberA", Grade.VIP);
-        memberService.join(member);
+         memberService.join(member);
 
         Member findMember = memberService.findMember(1L);
-        System.out.println("new"+member.getName());
-        System.out.println("find"+findMember.getName());
+        System.out.println("new member : "+member.getName());
+        System.out.println("find member : "+findMember.getName());
     }
 }
