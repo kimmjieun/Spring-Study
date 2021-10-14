@@ -18,6 +18,17 @@ public class OrderServiceImpl implements OrderService {
     }
     // 생성자를 통해 위의 선언한 곳에 값이 할당 됨
 
+
+//    // 수정자 주입
+//    @Autowired
+//    public void setMemberRepository(MemberRepository memberRepository) {
+//        this.memberRepository = memberRepository;
+//    }
+//    @Autowired
+//    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+//        this.discountPolicy = discountPolicy;
+//    }
+
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice){
         Member member = memberRepository.findById(memberId);
